@@ -16,9 +16,9 @@ public class Main {
       Service s = new Service();
 
       while (true) {
-        System.out.print("podaj imie studenta lub wpisz end: ");
+        System.out.print("podaj imie studenta lub 'wypisz': ");
         String name = scanner.nextLine();
-        if (name.equals("end")) {
+        if (name.equalsIgnoreCase("wypisz")) {
           break;
         }
 
