@@ -22,6 +22,9 @@ public class Main {
           break;
         }
 
+        System.out.print("podaj nazwisko: ");
+        String surname = scanner.nextLine();
+
         System.out.print("podaj wiek: ");
         int age;
         try {
@@ -31,7 +34,7 @@ public class Main {
           continue;
         }
 
-        s.addStudent(new Student(name, age));
+        s.addStudent(new Student(name, surname, age));
       }
 
       var students = s.getStudents();
