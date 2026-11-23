@@ -13,26 +13,33 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     try (Scanner scanner = new Scanner(System.in)) {
-        try {
-          Service s = new Service();
+      Service s = new Service();
 
-          System.out.print("podaj imie studenta: ");
-          String name = scanner.nextLine();
-          System.out.print("podaj wiek: ");
-          int age = Integer.parseInt(scanner.nextLine());
-          s.addStudent(new Student(name, age));
-
-          var students = s.getStudents();
-          for (Student current : students) {
-            System.out.println(current.ToString());
-          }
-        } catch (IOException e) {
-          System.err.println("nie udalo sie odczytac bazy:  " + e.getMessage());
-        } catch (NumberFormatException e) {
-          System.err.println("wiek musi byc calkowity");
+      while (true) {
+        System.out.print("podaj imie studenta lub wpisz end: ");
+        String name = scanner.nextLine();
+        if (name.equals("end")) {
+          break;
         }
-    }catch (Exception e){
-        System.out.print(e);
+
+        System.out.print("podaj wiek: ");
+        int age;
+        try {
+          age = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+          System.out.println("wiek musi byc liczba calkowita");
+          continue;
+        }
+
+        s.addStudent(new Student(name, age));
+      }
+
+      var students = s.getStudents();
+      for (Student current : students) {
+        System.out.println(current.ToString());
+      }
+    } catch (IOException e) {
+      System.err.println("wystapil blad z odczytem lub zapisem bazy: " + e.getMessage());
     }
   }
 }
